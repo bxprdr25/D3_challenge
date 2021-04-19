@@ -13,7 +13,7 @@
 
 .inactive {
   font-weight: lighter;
-  fill: #c9c9c9;
+  fill: #520303;
   transition: fill 0.3s ease-out;
   text-anchor: middle;
 }
@@ -32,6 +32,7 @@
 
 .stateCircle {
   fill: #89bdd3;
+  fill: #2d2d2ee0;
   stroke: #e3e3e3;
 }
 
@@ -45,7 +46,7 @@
   font-size: 12px;
   line-height: 1;
   line-height: 1.5em;
-  color: #fff;
+  color: rgb(194, 24, 24);
   text-align: center;
   text-transform: capitalize;
   background: rgba(0, 0, 0, 0.8);

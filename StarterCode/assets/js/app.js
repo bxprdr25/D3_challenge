@@ -15,7 +15,7 @@ var height = svgHeight - margin.top - margin.bottom;
 // Create an SVG wrapper, append an SVG group that will hold our chart,
 // and shift the latter by left and top margins.
 var svg = d3
-  .select("#my_dataviz")
+  .select("#scatter")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
@@ -103,11 +103,11 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
   var ylabel;
 
   if (chosenXAxis === "poverty") {
-    xlabel = "Poverty:";
+    xlabel = "Poverty: ";
   }else if (chosenXAxis === "income") {
-    xlabel = "Median Income:"
+    xlabel = "Median Income: "
   }else{
-    label = "Age:";
+    xlabel = "Age: ";
   }
 
   // Conditional for Y Axis.
@@ -120,7 +120,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
   }
 
   var toolTip = d3.tip()
-    .attr("class", "tooltip")
+    .attr("class", "d3-tip")
     .offset([120, -60])
     .html(function(d) {if (chosenXAxis === "age") {
       // All yAxis tooltip labels presented and formated as %.
@@ -158,7 +158,7 @@ d3.csv("./assets/data/data.csv").then(function(data, err) {
   data.forEach(function(d) {
     d.poverty = +d.poverty;
     d.age = +d.age;
-    d.incomeMoe = +d.incomeMoe;
+    d.income = +d.income;
     d.healthcare = +d.healthcare;
     d.obesity = +d.obesity;
     d.smokes = +d.smokes;
@@ -167,7 +167,7 @@ d3.csv("./assets/data/data.csv").then(function(data, err) {
   // xLinearScale function above csv import
   var xLinearScale = xScale(data, chosenXAxis);
   var yLinearScale = yScale(data, chosenYAxis);
-  
+
   // Create initial axis functions
   var bottomAxis = d3.axisBottom(xLinearScale);
   var leftAxis = d3.axisLeft(yLinearScale);
@@ -189,8 +189,8 @@ d3.csv("./assets/data/data.csv").then(function(data, err) {
     .append("circle")    
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
     .attr("cy", d => yLinearScale(d[chosenYAxis]))
-    .attr("r", 8)
-    .attr("fill", "#89bdd3")
+    .attr("r", 10)
+    .attr("fill", "rgb(3, 90, 172)")
     .attr("opacity", ".7");
 
   var circleLabels = chartGroup.selectAll(null)
@@ -209,7 +209,7 @@ d3.csv("./assets/data/data.csv").then(function(data, err) {
         return d.abbr;
     })
       .attr("font-family", "sans-serif")
-      .attr("font-size", "8px")
+      .attr("font-size", "9px")
       .attr("font-weight", "bold")
       .attr("text-anchor", "middle")
       .attr("fill", "white");
@@ -222,13 +222,18 @@ d3.csv("./assets/data/data.csv").then(function(data, err) {
     .attr("x", 0)
     .attr("y", 40)
     .attr("value", "poverty") // value to grab for event listener
+    .attr("stroke", "#2d2d2ee0")
+    .attr("font-weight", "bold")
     .classed("inactive", true)
     .text("In Poverty (%)");
+    
 
   var ageLabel = xlabelsGroup.append("text")
     .attr("x", 0)
     .attr("y", 20)
     .attr("value", "age") // value to grab for event listener
+    .attr("stroke", "rgb(3, 90, 172)")
+    .attr("font-weight", "bold")
     .classed("inactive", true)
     .text("Age (Median)");
   
@@ -236,6 +241,8 @@ d3.csv("./assets/data/data.csv").then(function(data, err) {
     .attr("x", 0)
     .attr("y", 60)
     .attr("value", "income") // value to grab for event listener
+    .attr("stroke", "#520303")
+    .attr("font-weight", "bold")
     .classed("inactive", true)
     .text("Household Income (Median)");
     
@@ -250,6 +257,8 @@ d3.csv("./assets/data/data.csv").then(function(data, err) {
     .attr("x", 0 - (height / 2))
     .attr("dy", "1em")
     .attr("value", "healthcare")
+    .attr("stroke", "rgb(3, 90, 172)")
+    .attr("font-weight", "bold")
     .classed("inactive", true)
     .text("Lacks Healthcare (%)");
 
@@ -258,6 +267,8 @@ d3.csv("./assets/data/data.csv").then(function(data, err) {
     .attr("y", 20 - margin.left)
     .attr("dy", "1em")
     .attr("value", "smokes")
+    .attr("stroke", "#2d2d2ee0")
+    .attr("font-weight", "bold")
     .classed("inactive", true)
     .text("Smokes (%)");
     
@@ -266,6 +277,8 @@ d3.csv("./assets/data/data.csv").then(function(data, err) {
     .attr("y", 40 - margin.left)
     .attr("dy", "1em")
     .attr("value", "obesity")
+    .attr("stroke", "#520303")
+    .attr("font-weight", "bold")
     .classed("inactive", true)
     .text("Obese (%)");
 
@@ -391,7 +404,5 @@ d3.csv("./assets/data/data.csv").then(function(data, err) {
         };
       
       });
-}).catch(function(error) {
-  console.log(error);
-});
+})
 });

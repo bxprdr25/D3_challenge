@@ -6,12 +6,38 @@
 /* Sticky Footer rules (https://getbootstrap.com/examples/sticky-footer/) */
 html {
   position: relative;
-  min-height: 100%;
+
 }
 
 body {
   /* Padding bottom by footer height */
   padding-bottom: 80px;
+  background-image: url("old-paper-texture-2.jpg");
+  background-repeat: no-repeat;
+}
+
+h1{
+  font-family: 'News Cycle', sans-serif;
+  font-weight: bold;
+  border-bottom: 2px rgb(3, 90, 172) solid;
+}
+
+.article{
+  margin: 0%;
+  width:120%
+}
+
+h2{
+  text-align: center;
+}
+
+p{
+  align-content:flex-start;
+}
+
+svg{
+  margin-bottom: 5%;
+  max-height: max-content;
 }
 
 #footer {
@@ -22,7 +48,9 @@ body {
   padding-top: 20px;
   padding-bottom: 40px;
   text-align: center;
-  background-color: #f5f5f5;
+  font-weight: bold;
+  color: rgb(3, 90, 172);
+  border-top: dashed darkblue 2px;
 }
 
 #footer p {
